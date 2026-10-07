@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Mitra Driver - Whoosh Express</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Custom scrollbar for better looks */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen pb-12">
+
+    <!-- Header -->
+    <header class="bg-black text-white shadow-lg relative overflow-hidden border-b-4 border-orange-500">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+        <div class="max-w-4xl mx-auto px-4 py-6 relative z-10 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between">
+            <div class="flex flex-col items-center sm:items-start">
+                <img src="logo-whoosh.jpg" alt="Whoosh Express Logo" class="h-16 sm:h-20 object-contain mb-2">
+                <p class="text-slate-300 mt-1 text-lg font-medium tracking-wide">Form Data Calon Mitra Driver</p>
+            </div>
+            <div class="mt-4 sm:mt-0 hidden sm:block">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-blue-600 opacity-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 mt-8">
+        <!-- Form ditambahkan enctype untuk mendukung pengiriman file/dokumen -->
+        <form id="registrationForm" enctype="multipart/form-data" class="bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden" novalidate>
+            
+            <!-- Konfigurasi FormSubmit Hidden Inputs -->
+            <input type="hidden" name="_subject" value="Pendaftaran Mitra Driver Baru - Whoosh Express">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+
+            <!-- SECTION A: DATA PRIBADI -->
+            <div class="p-6 sm:p-8 border-b border-slate-200">
+                <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center">
+                    <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm shadow-sm">A</span>
+                    Data Pribadi
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Nama Lengkap -->
+                    <div class="md:col-span-2">
+                        <label for="nama_lengkap" class="block text-sm font-medium text-slate-700 mb-1">Nama Lengkap <span class="text-red-500">*</span></label>
+                        <input type="text" id="nama_lengkap" name="nama_lengkap" required
+                            class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                            placeholder="Sesuai KTP">
+                    </div>
+
+                    <!-- Alamat KTP -->
+                    <div class="md:col-span-2">
+                        <label for="alamat_ktp" class="block text-sm font-medium text-slate-700 mb-1">Alamat KTP <span class="text-red-500">*</span></label>
+                        <textarea id="alamat_ktp" name="alamat_ktp" rows="3" required
+                            class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                            placeholder="Alamat lengkap sesuai KTP"></textarea>
+                    </div>
+
+                    <!-- Alamat Domisili -->
+                    <div class="md:col-span-2">
+                        <label for="alamat_domisili" class="block text-sm font-medium text-slate-700 mb-1">Alamat Domisili <span class="text-red-500">*</span></label>
+                        <div class="mb-2 flex items-center">
+                            <input type="checkbox" id="sama_ktp" class="rounded border-slate-300 text-orange-600 focus:ring-orange-500">
+                            <label for="sama_ktp" class="ml-2 text-sm text-slate-600">Sama dengan alamat KTP</label>
+                        </div>
+                        <textarea id="alamat_domisili" name="alamat_domisili" rows="3" required
+                            class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                            placeholder="Alamat tempat tinggal saat ini"></textarea>
+                    </div>
+
+                    <!-- Umur -->
+                    <div>
+                        <label for="umur" class="block text-sm font-medium text-slate-700 mb-1">Umur <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <input type="number" id="umur" name="umur" min="17" max="65" required
+                                class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                                placeholder="Misal: 25">
+                            <span class="absolute right-4 top-2 text-slate-500">Tahun</span>
+                        </div>
+                    </div>
+
+                    <!-- Nomor SIM -->
+                    <div>
+                        <label for="nomor_sim" class="block text-sm font-medium text-slate-700 mb-1">Nomor SIM <span class="text-red-500">*</span></label>
+                        <input type="text" id="nomor_sim" name="nomor_sim" required
+                            class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                            placeholder="Nomor lisensi mengemudi">
+                    </div>
+
+                    <!-- Jenis SIM -->
+                    <div>
+                        <label for="jenis_sim" class="block text-sm font-medium text-slate-700 mb-1">Jenis SIM <span class="text-red-500">*</span></label>
+                        <select id="jenis_sim" name="jenis_sim" required
+                            class="w-full px-4 py-2 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors">
+                            <option value="">Pilih Jenis SIM</option>
+                            <option value="SIM A">SIM A (Mobil Penumpang/Barang)</option>
+                            <option value="SIM B1">SIM B1 (Mobil Bus/Barang Besar)</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+
+                    <!-- Masa Berlaku SIM -->
+                    <div>
+                        <label for="masa_berlaku_sim" class="block text-sm font-medium text-slate-700 mb-1">Masa Berlaku SIM <span class="text-red-500">*</span></label>
+                        <input type="date" id="masa_berlaku_sim" name="masa_berlaku_sim" required
+                            class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION B: DATA KONTAK & AKUN MITRA -->
+            <div class="p-6 sm:p-8 border-b border-slate-200 bg-slate-50">
+                <h2 class="text-xl font-bold text-slate-800 mb-2 flex items-center">
+                    <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm shadow-sm">B</span>
+                    Data Kontak & Akun Mitra
+                </h2>
+                
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded-r-md">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-yellow-700 font-medium">
+                                Catatan Penting: Nomor HP dan email <strong class="font-bold">wajib aktif</strong> karena akan digunakan untuk proses pendaftaran dan aktivasi akun Mitra Driver.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="no_hp" class="block text-sm font-medium text-slate-700 mb-1">No. HP Aktif (WhatsApp) <span class="text-red-500">*</span></label>
+                        <div class="flex">
+                            <span class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-slate-300 bg-slate-100 text-slate-500 text-sm">
+                                +62
+                            </span>
+                            <input type="tel" id="no_hp" name="no_hp" required
+                                class="flex-1 min-w-0 block w-full px-4 py-2 border border-slate-300 rounded-none rounded-r-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                                placeholder="81234567890">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email Aktif <span class="text-red-500">*</span></label>
+                        <input type="email" id="email" name="email" required
+                            class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                            placeholder="nama@email.com">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION C: DOKUMEN WAJIB -->
+            <div class="p-6 sm:p-8 border-b border-slate-200">
+                <h2 class="text-xl font-bold text-slate-800 mb-6 flex items-center">
+                    <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm shadow-sm">C</span>
+                    Dokumen Wajib Dilampirkan
+                </h2>
+                <p class="text-sm text-slate-500 mb-6">Format file yang diterima: PDF, JPG, JPEG, PNG (Maksimal 5MB per file).</p>
+                
+                <div class="space-y-5">
+                    <!-- File KTP -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">1. Foto/Scan KTP <span class="text-red-500">*</span></label>
+                        <input type="file" id="dokumen_ktp" name="dokumen_ktp" accept=".pdf, .jpg, .jpeg, .png" required
+                            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:cursor-pointer file:transition-colors border border-slate-300 rounded-lg">
+                    </div>
+
+                    <!-- File SIM -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">2. SIM Mobil yang Masih Aktif <span class="text-red-500">*</span></label>
+                        <input type="file" id="dokumen_sim" name="dokumen_sim" accept=".pdf, .jpg, .jpeg, .png" required
+                            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:cursor-pointer file:transition-colors border border-slate-300 rounded-lg">
+                    </div>
+
+                    <!-- File SKCK -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">3. SKCK yang Masih Aktif <span class="text-red-500">*</span></label>
+                        <input type="file" id="dokumen_skck" name="dokumen_skck" accept=".pdf, .jpg, .jpeg, .png" required
+                            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:cursor-pointer file:transition-colors border border-slate-300 rounded-lg">
+                    </div>
+
+                    <!-- Foto Close-up -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">4. Foto Close-up Sedang Memegang KTP <span class="text-red-500">*</span></label>
+                        <input type="file" id="foto_pegang_ktp" name="foto_pegang_ktp" accept=".jpg, .jpeg, .png" required
+                            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:cursor-pointer file:transition-colors border border-slate-300 rounded-lg">
+                    </div>
+
+                    <!-- Sertifikat -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">5. Sertifikat Pendukung (Opsional)</label>
+                        <input type="file" id="dokumen_sertifikat" name="dokumen_sertifikat" accept=".pdf, .jpg, .jpeg, .png"
+                            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 file:cursor-pointer file:transition-colors border border-slate-300 rounded-lg">
+                    </div>
+
+                    <!-- Link Google Maps -->
+                    <div>
+                        <label for="link_maps" class="block text-sm font-medium text-slate-700 mb-1">6. Link Lokasi Tempat Tinggal/Domisili di Google Maps <span class="text-red-500">*</span></label>
+                        <div class="relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <input type="url" id="link_maps" name="link_maps" required
+                                class="w-full pl-10 px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                                placeholder="https://maps.app.goo.gl/...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION D & PENTING -->
+            <div class="p-6 sm:p-8 bg-slate-50">
+                
+                <h2 class="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                    <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 text-sm shadow-sm">D</span>
+                    Persyaratan Perangkat & Persetujuan
+                </h2>
+
+                <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm mb-6 flex items-start">
+                    <div class="flex items-center h-5">
+                        <input id="req_perangkat" name="req_perangkat" type="checkbox" required value="Ya"
+                            class="h-5 w-5 text-orange-600 border-slate-300 rounded focus:ring-orange-500">
+                    </div>
+                    <div class="ml-3 text-sm">
+                        <label for="req_perangkat" class="font-medium text-slate-800">Persyaratan Perangkat <span class="text-red-500">*</span></label>
+                        <p class="text-slate-600 mt-1">Saya menyatakan bahwa saya memiliki smartphone Android minimal Android 13 atau versi lebih tinggi untuk menjalankan aplikasi Mitra Driver Whoosh Express.</p>
+                    </div>
+                </div>
+
+                <div class="bg-red-50 p-5 rounded-lg border border-red-100 mb-8 flex items-start">
+                    <div class="flex items-center h-5">
+                        <input id="persetujuan_penting" name="persetujuan_penting" type="checkbox" required value="Setuju"
+                            class="h-5 w-5 text-red-600 border-red-300 rounded focus:ring-red-500">
+                    </div>
+                    <div class="ml-3 text-sm">
+                        <label for="persetujuan_penting" class="font-bold text-red-800 uppercase tracking-wide">PENTING <span class="text-red-500">*</span></label>
+                        <p class="text-red-700 mt-1">Saya menjamin seluruh data dan dokumen yang diberikan adalah benar, valid, dan dapat dipertanggungjawabkan. Saya mengerti bahwa data ini akan digunakan untuk proses verifikasi dan pendaftaran calon Mitra Driver Whoosh Express.</p>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex justify-end">
+                    <button type="submit" id="btnSubmit" 
+                        class="w-full sm:w-auto px-8 py-3 bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:ring-orange-300 text-white font-semibold rounded-lg shadow-md transition-all flex justify-center items-center">
+                        Kirim Pendaftaran
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <!-- Custom Modal for Notifications (Replacing alert) -->
+    <div id="notificationModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-xl shadow-2xl max-w-md w-full overflow-hidden transform scale-95 transition-transform duration-300" id="modalContent">
+            <div id="modalHeader" class="p-6 text-center border-b border-slate-100">
+                <div id="modalIcon" class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+                    <!-- Icon will be injected by JS -->
+                </div>
+                <h3 id="modalTitle" class="text-2xl font-bold text-slate-800">Title</h3>
+                <p id="modalMessage" class="text-slate-600 mt-2">Message goes here.</p>
+            </div>
+            <div class="p-4 bg-slate-50 flex justify-center">
+                <button id="modalBtn" class="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-medium transition-colors w-full">
+                    Mengerti
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('registrationForm');
+            const btnSubmit = document.getElementById('btnSubmit');
+            const modal = document.getElementById('notificationModal');
+            const modalContent = document.getElementById('modalContent');
+            const modalBtn = document.getElementById('modalBtn');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+            const modalIcon = document.getElementById('modalIcon');
+            
+            // Logic to sync Alamat Domisili with Alamat KTP
+            const cbSamaKtp = document.getElementById('sama_ktp');
+            const taAlamatKtp = document.getElementById('alamat_ktp');
+            const taAlamatDomisili = document.getElementById('alamat_domisili');
+
+            cbSamaKtp.addEventListener('change', function() {
+                if(this.checked) {
+                    taAlamatDomisili.value = taAlamatKtp.value;
+                    taAlamatDomisili.readOnly = true;
+                    taAlamatDomisili.classList.add('bg-slate-100');
+                } else {
+                    taAlamatDomisili.value = '';
+                    taAlamatDomisili.readOnly = false;
+                    taAlamatDomisili.classList.remove('bg-slate-100');
+                }
+            });
+
+            taAlamatKtp.addEventListener('input', function() {
+                if(cbSamaKtp.checked) {
+                    taAlamatDomisili.value = this.value;
+                }
+            });
+
+            // Modal Handlers
+            function showModal(type, title, message) {
+                modalTitle.textContent = title;
+                modalMessage.textContent = message;
+                
+                if(type === 'success') {
+                    modalIcon.className = 'mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4 text-green-600';
+                    modalIcon.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+                    modalBtn.className = 'px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-colors w-full';
+                } else {
+                    modalIcon.className = 'mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-4 text-red-600';
+                    modalIcon.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+                    modalBtn.className = 'px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors w-full';
+                }
+
+                modal.classList.remove('hidden');
+                // trigger reflow
+                void modal.offsetWidth;
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+            }
+
+            function hideModal() {
+                modal.classList.add('opacity-0');
+                modalContent.classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+
+            modalBtn.addEventListener('click', hideModal);
+
+            // Validation and Submission Handler using Fetch to FormSubmit
+            form.addEventListener('submit', function(e) {
+                e.preventDefault(); // Mencegah reload halaman
+                
+                // Trigger HTML5 built-in validation visually
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                // Check file sizes (Max 5MB per file dikarenakan limitasi umum email/API)
+                const fileInputs = form.querySelectorAll('input[type="file"]');
+                let fileOversize = false;
+                const MAX_SIZE = 5 * 1024 * 1024; // 5 MB
+
+                for (let input of fileInputs) {
+                    if (input.files && input.files[0]) {
+                        if (input.files[0].size > MAX_SIZE) {
+                            fileOversize = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (fileOversize) {
+                    showModal('error', 'Ukuran File Terlalu Besar', 'Maksimal ukuran setiap file dokumen adalah 5MB. Silakan periksa kembali lampiran Anda.');
+                    return;
+                }
+
+                // Change button state to loading
+                const originalBtnContent = btnSubmit.innerHTML;
+                btnSubmit.innerHTML = `<svg class="animate-spin h-5 w-5 mr-3 text-white inline" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Mengirim Data...`;
+                btnSubmit.disabled = true;
+                btnSubmit.classList.add('opacity-75', 'cursor-not-allowed');
+
+                // Mengumpulkan data Form (termasuk file)
+                const formData = new FormData(form);
+
+                // Kirim data menggunakan Fetch API ke FormSubmit
+                // Tujuan email diset ke rian@whooshexpress.com
+                fetch('https://formsubmit.co/ajax/rian@whooshexpress.com', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Reset Button
+                    btnSubmit.innerHTML = originalBtnContent;
+                    btnSubmit.disabled = false;
+                    btnSubmit.classList.remove('opacity-75', 'cursor-not-allowed');
+                    
+                    if (data.success) {
+                        showModal('success', 'Pendaftaran Berhasil Terkirim!', 'Data pendaftaran dan dokumen Anda telah berhasil dikirim ke tim Whoosh Express (rian@whooshexpress.com). Kami akan segera mereview dan menghubungi Anda.');
+                        form.reset();
+                        // Reset domisili readonly state
+                        taAlamatDomisili.readOnly = false;
+                        taAlamatDomisili.classList.remove('bg-slate-100');
+                    } else {
+                        throw new Error('Terjadi kesalahan pada server FormSubmit');
+                    }
+                })
+                .catch(error => {
+                    // Reset Button
+                    btnSubmit.innerHTML = originalBtnContent;
+                    btnSubmit.disabled = false;
+                    btnSubmit.classList.remove('opacity-75', 'cursor-not-allowed');
+                    
+                    showModal('error', 'Gagal Mengirim Data', 'Terjadi kesalahan saat mengirim data. Pastikan koneksi internet Anda stabil atau coba lagi beberapa saat. Detail: ' + error.message);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
